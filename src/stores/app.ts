@@ -1,6 +1,7 @@
 // Utilities
 import { defineStore } from 'pinia'
 import { KickbaseLeague } from '@/model/KickbaseLeague'
+import { getLeagues } from '@/service/ApiService';
 
 export const useAppStore = defineStore('app', {
   state: () => ({
@@ -25,9 +26,24 @@ export const useAppStore = defineStore('app', {
     setToken(token: string) {
       this.token = token
     },
-    clearToken() {
+
+    logout() {
       this.token = ''
+      this.isLoggedIn = false;
+      this.leagues = []
     },
+
+    async login(token: string) {
+      this.token = token
+      this.isLoggedIn = true;
+      try {
+        const leagues = await getLeagues();
+        this.leagues = leagues;
+      } catch {
+        this.isLoggedIn = false;
+        this.leagues = []
+      }
+    }
   },
   persist: {
     storage: localStorage,

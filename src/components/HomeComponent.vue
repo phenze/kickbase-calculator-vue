@@ -76,13 +76,8 @@ const doLogin = async () => {
   if (form.value?.isValid) {
 
     loginActive.value = true
-
-    console.log(username.value)
-    console.log(password.value)
-
     try {
-      const resrult = await sendLoginRequest(username.value, password.value);
-      console.log(resrult);
+      await sendLoginRequest(username.value, password.value);
       loginActive.value = false
     } catch (err: unknown) {
       console.log(`error during login`, err)

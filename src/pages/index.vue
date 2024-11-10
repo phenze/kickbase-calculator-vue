@@ -27,9 +27,6 @@ const isLoading = computed(() => !appStore.initDone);
 const isLoggedIn = computed(() => appStore.isLoggedIn);
 
 const showSnackbar = computed(() => appStore.showErrorMessage);
-// const showSnackbar = ref(true)
 const snackbarText = computed(() => appStore.errorMessage);
 
-
-//
 </script>

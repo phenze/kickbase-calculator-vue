@@ -64,7 +64,7 @@ export async function sendLoginRequest(username: string, password: string): Prom
         if (res.data !== undefined && res.data !== '') {
             const token = res['data']['tkn']
             const appStore = useAppStore()
-            appStore.setToken(token)
+            await appStore.login(token)
             return true
         } else {
             return false
