@@ -1,5 +1,6 @@
 // Utilities
 import { defineStore } from 'pinia'
+import { PersistantKickbaseLeague } from '@/model/PersistantKickbaseLeague'
 import { KickbaseLeague } from '@/model/KickbaseLeague'
 import { getLeagues } from '@/service/ApiService';
 
@@ -11,7 +12,7 @@ export const useAppStore = defineStore('app', {
     errorMessage: '',
     token: '',
     leagues: [] as KickbaseLeague[],
-    //
+    persistantLeagueStats: [] as PersistantKickbaseLeague[]
   }),
 
   actions: {
@@ -47,6 +48,6 @@ export const useAppStore = defineStore('app', {
   },
   persist: {
     storage: localStorage,
-    pick: ['token'],
+    pick: ['token', 'persistantLeagueStats'],
   },
 })

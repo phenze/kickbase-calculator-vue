@@ -16,6 +16,7 @@ export interface KickbasePlayer {
     tfhmvt: number;
 
     // custom fields
-    expanded: boolean
+    playerSellStatus: number
+    playerSellable: boolean
 
 }

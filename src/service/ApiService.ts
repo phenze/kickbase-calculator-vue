@@ -39,7 +39,22 @@ export async function getSquad(league: string): Promise<KickbasePlayer[]> {
             `/leagues/${league}/squad`
         )
         if (res.data !== undefined && res.data !== '') {
-            return res.data['it']
+            const retVal = res.data['it'] as KickbasePlayer[]
+            const appStore = useAppStore()
+            const leagueData = appStore.persistantLeagueStats.find(t => t.i === league)
+            for (const player of retVal) {
+                // default is to sell player
+                player.playerSellStatus = 1;
+                if (leagueData !== undefined) {
+                    const plData = leagueData.players.find(t => t.i === player.i)
+                    if (plData !== undefined) {
+                        player.playerSellStatus = plData.status
+                        player.playerSellable = player.playerSellStatus !== -1
+                    }
+
+                }
+            }
+            return retVal
         } else {
             return []
         }
