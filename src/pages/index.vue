@@ -1,12 +1,12 @@
 <template>
 
-  <v-container fluid>
+  <v-container fluid class="pa-0">
     <template v-if="!isLoading">
       <HomeComponent v-if="!isLoggedIn" />
       <CalculatorComponent v-if="isLoggedIn" />
     </template>
     <template v-if="isLoading">
-      <div class="text-center">
+      <div class="text-center mt-10">
         <v-progress-circular v-if="isLoading" :size="100" color="primary" indeterminate></v-progress-circular>
       </div>
     </template>

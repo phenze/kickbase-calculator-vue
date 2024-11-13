@@ -10,7 +10,7 @@
   <v-row>
     <v-col cols="12">
       <template v-if="loadingLeagueDetails">
-        <div class="text-center">
+        <div class="text-center mt-10">
           <v-progress-circular :active="loadingLeagueDetails" color="deep-purple" size="80"
             indeterminate></v-progress-circular>
         </div>
@@ -33,6 +33,11 @@
             </v-avatar>
           </template>
 
+          <template v-slot:item.n="{ value }">
+            <div>{{ value.n }}</div>
+            <small>{{ formatCurrency(value.mv) }}</small>
+          </template>
+
           <template v-slot:item.mv="{ value }">
             <v-chip :color="'grey'">
               {{ formatCurrency(value) }}
@@ -47,7 +52,8 @@
               <v-icon color="green-darken-2" icon="mdi-soccer" size="large"></v-icon>
             </template>
             <template v-if="value === -1">
-              <v-icon color="green-darken-2" icon="mdi-currency-usd-off" size="large"></v-icon>
+
+              <v-icon color="green-darken-2" icon="mdi-lock-outline" size="large"></v-icon>
             </template>
           </template>
 
@@ -116,7 +122,7 @@
                               prepend-icon="mdi-soccer">Behalten</v-btn>
                           </div>
                           <div class="text-disabled font-weight-black" v-if="item.playerSellStatus !== -1">
-                            <v-btn rounded="xs" :variant="'tonal'" prepend-icon="mdi-currency-usd-off"
+                            <v-btn rounded="xs" :variant="'tonal'" prepend-icon="mdi-lock-outline"
                               @click="setPlayerSellStatus(item, -1)">Unverkäuflich</v-btn>
                           </div>
                           <div class="text-disabled font-weight-black" v-if="item.playerSellStatus === -1">
@@ -178,6 +184,7 @@ const headers = ref([
   {
     title: 'Name',
     key: 'n',
+    value: (item: KickbasePlayer) => item,
     screenWidth: 250,
   },
   {
