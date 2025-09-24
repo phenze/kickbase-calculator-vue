@@ -28,7 +28,7 @@
           :row-props="getRowProps">
           <template v-slot:item.image="{ item }">
             <v-avatar color="grey-lighten-1">
-              <v-img class="pt-2" :src="`https://cdn.kickbase.com/files/players/${item.i}/1`" height="80" width="80"
+              <v-img class="pt-2" :src="`https://kickbase.b-cdn.net/pool/playersbig/${item.i}.png`" height="80" width="80"
                 fit></v-img>
             </v-avatar>
           </template>
